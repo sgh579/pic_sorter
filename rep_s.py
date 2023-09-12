@@ -1,7 +1,7 @@
 import re,argparse,os,json,md_s
 
-local_path = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/'
-pic_folder_path = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/md_pic_f'
+local_path = 'C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter/'
+pic_folder_path = 'C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter/md_pic_f'
 # select_range = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/W9'
 select_range = local_path
 
