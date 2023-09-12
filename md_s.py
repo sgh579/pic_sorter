@@ -50,11 +50,14 @@ class md_s:
         print('broken: {}'.format(self.broken_pic_links_list))
 
     def update_state(self):
-        
+        # print('update') 
         if self.all_pic_links_list == [] or self.unique_raw_pic_links_list == []:
             self.need_to_sort = False
+            # print('because of null')
+        
+        # print('uniq raw pic links:{}'.format(self.unique_raw_pic_links_list))
         for link in self.unique_raw_pic_links_list:
-            if os.path.exists(link):
+            if os.path.exists(os.path.join(self.parent_folder,link)):
                 self.valid_raw_pic_links_list.append(link)
 
         for link in self.all_pic_links_list:
@@ -65,6 +68,9 @@ class md_s:
             
         if self.valid_raw_pic_links_list != []:
             self.need_to_sort = True
+        else:
+            self.need_to_sort = False
+            # print('no valid pic links')
 
 
         

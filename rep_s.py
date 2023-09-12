@@ -1,15 +1,17 @@
 import re,argparse,os,json,md_s
 
-local_path = 'C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter/'
-pic_folder_path = ''
+local_path = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/'
+pic_folder_path = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/md_pic_f'
+# select_range = 'C:/Users/孙国珩/iCloudDrive/iCloud~md~obsidian/reports/W9'
+select_range = local_path
 
 class rep_s:
-    # range : select checked folders
+    # select_range : select checked folders
     # change_f : flag, set False to avoid operations
-    def __init__(self,range = None,change_f = False,local_path = None, pic_folder_path = None) -> None:
+    def __init__(self,select_range = None,change_f = False,local_path = None, pic_folder_path = None) -> None:
         self.local_path = local_path
         self.pic_folder_path = pic_folder_path
-        self.range = range
+        self.select_range = select_range
         self.change_f = change_f
         self.all_md_abspath = []
 
@@ -26,10 +28,12 @@ class rep_s:
         print(f'all md:{self.all_md_abspath}')
 
     def sort_one_md(self, md_abspath):
+        # print('this md {}'.format(md_abspath))
         mds = md_s.md_s(abspath = md_abspath)
         mds.get_pic_links()
         mds.update_state()
         if mds.need_to_sort == True:
+            # print('this file need to sort : {}'.format(md_abspath))
             # do planning
             sorted_filelist = self.plan_links(mds.valid_raw_pic_links_list)
 
@@ -46,7 +50,8 @@ class rep_s:
 ''')
 
             # mv
-            for i in range(len(sorted_filelist)):
+            loop_len = len(sorted_filelist)
+            for i in range(loop_len):
                 origin_f = os.path.join(mds.parent_folder,mds.valid_raw_pic_links_list[i])
                 origin_f = origin_f.replace('\\','/')
                 target_f = os.path.join(self.pic_folder_path,sorted_filelist[i])
@@ -74,6 +79,10 @@ class rep_s:
                 print('replce links in md:')
                 for i in range(len(sorted_filelist_rel_p)):
                     print(f'{mds.valid_raw_pic_links_list[i]} ========>  {sorted_filelist_rel_p[i]}')
+        else:
+            # print('this file {} won\'t be sorted'.format(md_abspath))
+            pass
+
 
     def plan_links(self, valid_pic_link_list):
         filename_cnt = self.pic_cnt
@@ -112,9 +121,9 @@ class rep_s:
             fp.write(con)
 
     def find_all_markdown(self):
-        all_folders_list = self.find_folders(self.range)
+        all_folders_list = self.find_folders(self.select_range)
         # print(all_folders_list)
-        all_folders_list.append(self.range)
+        all_folders_list.append(self.select_range)
         all_md_path_list = []
         for folder in all_folders_list:
             with os.scandir(folder) as i:
@@ -140,9 +149,10 @@ class rep_s:
     def flow(self):
         self.get_cfg()
         self.find_all_markdown()
-        self.debug()
+        # self.debug()
         for md in self.all_md_abspath:
             self.sort_one_md(md)
+        print('flow done')
 
 
 if __name__ == '__main__':
@@ -152,5 +162,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
 
-    reps = rep_s(range= 'C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter', local_path= 'C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter', pic_folder_path='C:/Users/孙国珩/Desktop/myThings/dev/pic_sorter/md_pic_f/',change_f=args.change)
+    reps = rep_s(select_range= select_range, local_path= local_path, pic_folder_path=pic_folder_path,change_f=args.change)
     reps.flow()
