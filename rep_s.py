@@ -17,6 +17,7 @@ class rep_s:
 
         self.pic_cnt = 0
         self.next_pic_cnt = 0
+        
 
         os.chdir(self.local_path)
 
@@ -28,6 +29,10 @@ class rep_s:
         print(f'all md:{self.all_md_abspath}')
 
     def sort_one_md(self, md_abspath):
+        if self.change_f:
+            self.get_cfg()
+        else:
+            self.pic_cnt = self.next_pic_cnt
         # print('this md {}'.format(md_abspath))
         mds = md_s.md_s(abspath = md_abspath)
         mds.get_pic_links()
@@ -148,6 +153,7 @@ class rep_s:
         return folders
     def flow(self):
         self.get_cfg()
+        self.next_pic_cnt = self.pic_cnt
         self.find_all_markdown()
         # self.debug()
         for md in self.all_md_abspath:
