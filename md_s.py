@@ -74,7 +74,11 @@ class md_s:
 
 
         
-
+# affect some memberlist variables
+# all_pic_links_list 
+# sorted_pic_links_list
+# raw_pic_links_list
+# unique_sorted_pic_links_list
     def get_pic_links(self):
         l_all_pic_links_list = []
         pattern = r'![[].*?[]]\((.+?)\)' 
