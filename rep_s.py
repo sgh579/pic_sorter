@@ -152,13 +152,14 @@ class rep_s:
 
         return folders
     def flow(self):
+        print('=================start rep flow====================')
         self.get_cfg()
         self.next_pic_cnt = self.pic_cnt
         self.find_all_markdown()
         # self.debug()
         for md in self.all_md_abspath:
             self.sort_one_md(md)
-        print('flow done')
+        print('===================flow done=======================')
 
 
 if __name__ == '__main__':
