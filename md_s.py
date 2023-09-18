@@ -14,6 +14,7 @@ class md_s:
         self.raw_pic_links_list = []
         self.unique_raw_pic_links_list = []
         self.unique_sorted_pic_links_list = []
+        self.unique_sorted_pic_names_list = []
 
         self.valid_raw_pic_links_list = []
         self.broken_pic_links_list = []
@@ -99,6 +100,16 @@ class md_s:
         for link in self.raw_pic_links_list:
             if link not in self.unique_raw_pic_links_list:
                 self.unique_raw_pic_links_list.append(link)
+
+        for link in self.unique_sorted_pic_links_list:
+            name_start = 0
+            i = 0
+            for char in link:
+                if char == '/' or char == '\\':
+                    name_start = i+1
+                i+=1
+
+            self.unique_sorted_pic_names_list.append(link[name_start:])
 
         
 
