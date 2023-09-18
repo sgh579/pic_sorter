@@ -35,6 +35,9 @@ if __name__ == '__main__':
         print('no cfg,exit')
         exit(0)
 
-    print(args.zip_files)
+
+    if args.zip_files != None:
+        print(args.zip_files)
+        zip_folder = j_dict['zip_folder']
   
 
