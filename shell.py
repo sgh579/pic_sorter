@@ -86,11 +86,11 @@ if __name__ == '__main__':
                             this_link_name = name
                             break
                     con = con.replace(link,name)
-                    print(f'replace {link} to {name}')
+                    # print(f'replace {link} to {name}')
                 fp.write(con)
             
-            print('mds pic names:')
-            print(mds.unique_sorted_pic_names_list)
+            # print('mds pic names:')
+            # print(mds.unique_sorted_pic_names_list)
         
   
     else:
