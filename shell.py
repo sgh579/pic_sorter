@@ -1,6 +1,9 @@
 
 import re,argparse,os,json,md_s,rep_s
 
+# param
+using_cfg = './sort_cfg.json'
+
 if __name__ == '__main__':
 
     shell = os.environ.get('SHELL')
@@ -18,9 +21,9 @@ if __name__ == '__main__':
 
     j_dict = {}
 
-    if os.path.exists('./sort_report.json') == True:
+    if os.path.exists(using_cfg) == True:
         print('json exists')
-        with open('./sort_report.json','r',encoding='utf-8') as fp:
+        with open(using_cfg,'r',encoding='utf-8') as fp:
             j_con = fp.read()
             j_dict = json.loads(j_con)
 
